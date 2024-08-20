@@ -2,7 +2,7 @@
 # Project Configuration
 #
 
-PROJECT := maxisynthsvf
+PROJECT := maxisnare
 PROJECT_TYPE := synth
 
 ##############################################################################

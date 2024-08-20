@@ -1,38 +1,48 @@
-# maxisynthsvf: logue SDK 2.0 not so basic Synth unit using Maximilian library
-
-This repository shows how to use the Maximilian library to develop a synth unit on the KORG logue SDK v2 for drumlogue.
-
-Since logue SDK v2 currently provides only the APIs to communicate with the drumlogue, you must develop all components, such as oscillators, filters, and envelopes, to build your synth unit. You can reduce many tasks to implement these components with the Maximilian library.
+# maxisnare: logue SDK 2.0 Synth unit using for a (much louder/noisier) snare
 
 This forks boochow' excellent work from maxisynth
 
-## Changes
+Discord complained about the korg drumlogue snare not being loud enough.
 
-- Uses two oscillators (with detune and transpose)
-- Adds a dedicated Amplitude Envelope
-- Switch the biquad filter to the SVF filter
-- The SVF can be set to bandpass/highpass/lowpass/notch/custom
-- The `custom` filter mode let you set a mix of the four filters states
-- Releases uses an exponential scale, it can go from 1ms to a dozen seconds
-- Longer attacks and decays
+Search no more.
 
-## Notes
+It can also take care of your gabber kick, trap 808, dnb reese, and a bunch of
+noisy cymbals too
 
-This is my first attempt at such project, it's working fine for
-me but glitches and bugs might happen which, within a synth engine
-can be loud noise and such, which might break your ears/equipments.
+## Controls
 
-Just be careful and rehearse accordingly if you're taking this
-on stage or in the booth.
+### Synth snare (page 1)
 
-## TODO
+- `Decay` = Length of a hit
+- `Wave` = choose a sine, triangle, square, or saw
+- `Osc/Nse` = balance the oscillator versus the white noise
 
-- I'm not happy with the way the filter cutoff scrolls
-- I'll need much bigger release envelopes at a later stage
+### Wave shaping (page 2)
 
-> This means the presets/motions will break across versions!!!
+Implement a pitch envelope, and the famous poutoushaper
+
+- `PitchDecay` = size of the pitch envelope
+- `>Pitch` = ...its intensity on the oscillator
+- `Shape` = pick a saturating wave shaper (among softclipping, hardclipping, and atan function)
+- `Gain` = The gain before entering the poutoushaper
+
+### Final EQ (page 3)
+
+This happens AFTER the clipping stage, and can drive the drumlogue internal engine.
+
+> ie. : This can be _LOUD_, and ringy
+
+You can pick low/high shelving EQ or a pick, gain can go up to +30dB for a really loud
+bump, negative and smaller value let you shape your sound more cleanly
+
+- `Gain` = -15db to +30dB at the cutoff frequency (after the waveshaping)
+- `Cutoff` = self exp.
+- `Resonance` = it won't self oscillate, but with steep gain, it'll be quite ringy
+- `Shape` = choose among LowShelve, HighShelve, and Peak
 
 ## How to build
+
+(words from `boochow`)
 
 Since Maximilian currently has some minor issues to use with logue SDK, use the patched fork of Maximilian, which I am providing at:
 
@@ -44,14 +54,14 @@ Place these repositories under `logue-sdk/platforms/drumlogue/` like this:
 drumlogue/
 ├── common
 ├── Maximilian
-└── maxisynth
+└── maxisnare
 ```
 
 then type
 
-`../../docker/run_cmd.sh build drumlogue/maxisynth`
+`../../docker/run_cmd.sh build drumlogue/maxisnare`
 
-and copy `maxisynth/maxisynth.drmlgunit` to your drumlogue.
+and copy `maxisnare/maxisnare.drmlgunit` to your drumlogue.
 
 ## Upstream project
 

@@ -17,9 +17,9 @@ const __unit_header unit_header_t unit_header = {
     .dev_id = 0x0U,                                        // developer identifier
     .unit_id = 0x0U,                                       // Id for this unit, should be unique within the scope of a given dev_id
     .version = 0x00010000U,                                // This unit's version: major.minor.patch (major<<16 minor<<8 patch).
-    .name = "maxisynthsvf",                                // Name for this unit, will be displayed on device
+    .name = "maxisnare",                                // Name for this unit, will be displayed on device
     .num_presets = 0,                                      // Number of internal presets this unit has
-    .num_params = 24,                                      // Number of parameters for this unit, max 24
+    .num_params = 12,                                      // Number of parameters for this unit, max 24
     .params = {
         // Format: min, max, center, default, type, fractional, frac. type, <reserved>, name
 
@@ -27,36 +27,40 @@ const __unit_header unit_header_t unit_header = {
 
         // Page 1
         {0, 127, 60, 60, k_unit_param_type_midi_note, 0, 0, 0, {"Note"}},
-        {0, 2, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"Wave"}},
-        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"Cutoff"}},
-        {-128, 128, 0, 16, k_unit_param_type_none, 5, 0, 0, {"Reso"}},
+        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"Decay"}},
+        {0, 3, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"Wave"}},
+        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"Osc/Nse"}},
 
         // Page 2
-        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"Attack"}},
-        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"Decay"}},
-        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"Sustain"}},
-        {0, 200, 0, 0, k_unit_param_type_percent, 1, 0, 0, {"Release"}},
+        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"PitchDecay"}},
+        {-100, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {">Pitch"}},
+        // {0, 3, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"Wave"}},
+        {0, 2, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"Shape"}},
+        {-15, 30, 0, 0, k_unit_param_type_db, 0, 0, 0, {"Gain"}},
+        // {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        // {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        // {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
 
         // Page 3
-        {0, 4, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"Filter"}},
-        {-100, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {">Pitch"}},
-        {-100, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {">Cutoff"}},
-        {0, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {">PWM"}},
+        {-15, 30, 0, 0, k_unit_param_type_db, 0, 0, 0, {"Gain"}},
+        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"Cutoff"}},
+        {-128, 128, 0, 16, k_unit_param_type_none, 5, 0, 0, {"Reso"}},
+        {0, 2, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"EQ Sh"}},
 
         // Page 4
-        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"vAttack"}},
-        {0, 2000, 0, 0, k_unit_param_type_msec, 0, 0, 0, {"vDecay"}},
-        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"vSustain"}},
-        {0, 200, 0, 0, k_unit_param_type_percent, 1, 0, 0, {"vRelease"}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
 
         // Page 5
-        {0, 2, 0, 0, k_unit_param_type_strings, 0, 0, 0, {"OSC2"}},
-        {0, 100, 0, 0, k_unit_param_type_none, 0, 0, 0, {"Detune"}},
-        {-24, 24, 0, 0, k_unit_param_type_none, 0, 0, 0, {"Semis"}},
-        {0, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {"Balance"}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
 
         // Page 6
-        {0, 100, 0, 100, k_unit_param_type_percent, 0, 0, 0, {"MixLP"}},
-        {0, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {"MixBP"}},
-        {0, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {"MixHP"}},
-        {0, 100, 0, 0, k_unit_param_type_percent, 0, 0, 0, {"MixNotch"}}}};
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+        {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}}}};
